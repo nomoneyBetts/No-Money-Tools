@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,7 +9,7 @@ namespace TweeningAnimations{
     */
     public enum TweenType{ Unset, Scale, FadeTMPro, FadeSprite, Move, LocalMove }
     /*
-    All Scripts used for tweening should inherit from Tween Animation.
+    All Scripts used for tweening should inherit from Tween Animation
     */
     public abstract class TweenAnimation : MonoBehaviour
     {
@@ -116,115 +115,52 @@ namespace TweeningAnimations{
         }
 #endregion
 
-        /*
-        Datastructure to hold either a Tween or a Sequence.
-        */
-        public class Twequence{
-            public bool isTween;
-            public Tween tween;
-            public Sequence sequence;
-            public bool isComplete{
-                get{
-                    if(isTween && tween != null)
-                        return tween.IsComplete();
-                    else if(!isTween && sequence != null)
-                        return sequence.IsComplete();
-                    return false;                        
-                }
-            }
+        public Sequence currentSequence{ get; protected set; }
+        public Tween currentTween{ get; protected set; }
+        // make sure to set this in inherited class
+        public bool isTween{ get; protected set; }
 
-            public Twequence(Tween tween){
-                isTween = true;
-                this.tween = tween;
-            }
-            public Twequence(Sequence sequence){
-                isTween = false;
-                this.sequence = sequence;
-            }
-
-            public void Kill(){
-                if(isTween)
-                    tween.Kill();
-                else
-                    sequence.Kill();
-            }
-
-            public void Play(){
-                if(isTween)
-                    tween.Play();
-                else
-                    sequence.Play();
-            }
-
-            public void Restart(){
-                if(isTween)
-                    tween.Restart();
-                else
-                    sequence.Restart();
-            }
-        }
-
-        /*
-        The current Twequence acting on the Gameobject.
-        */
-        public Twequence currentTwequence{ get; protected set; }
-        
-        /*
-        A collection of all Twequences acting on the Gameobject.
-        */
-        private List<Twequence> twequences;
-
-        /*
-        Wait for the current Twequence to complete, then perform an Action.
-        */
         public IEnumerator WaitForCurrent(Action onComplete){
-            if(currentTwequence != null){
-                if(currentTwequence.isTween)
-                    yield return currentTwequence.tween.WaitForCompletion();
-                else
-                    yield return currentTwequence.sequence.WaitForCompletion();
+            if(isTween && currentTween != null){
+                yield return currentTween.WaitForCompletion();
+            }
+            else if(!isTween && currentSequence != null){
+                yield return currentSequence.WaitForCompletion();
             }
             if(onComplete != null)
                 onComplete();
         }
 
-        /*
-        Kills all the Twequences acting on the Gameobject.
-        Probably a good idea to use sparingly, like transitioning between Scenes.
-        */
-        public void KillAll(){
-            if(twequences == null)
-                throw new NullReferenceException("Twequences not created prior to killing");
-
-            foreach(Twequence twequence in twequences){
-                twequence.Kill();
+        public void KillCurrent(){
+            if(currentSequence != null){
+                currentSequence.Kill();
+                currentSequence = null;
+            }
+            if(currentTween != null){
+                currentTween.Kill();
+                currentTween = null;
             }
         }
-    
-        /*
-        Converts a Tween or Sequence into a Twequence.
-        */
-        protected Twequence MakeTwequence(Tween tween){
-            if(twequences == null)
-                twequences = new List<Twequence>();
-            Twequence t = new Twequence(tween);
-            twequences.Add(t);
-            return t;
+
+        public void PlayCurrent(){
+            if(isTween)
+                currentTween.Play();
+            else
+                currentSequence.Play();
         }
-        protected Twequence MakeTwequence(Sequence sequence){
-            if(twequences == null)
-                twequences = new List<Twequence>();
-            Twequence t = new Twequence(sequence);
-            twequences.Add(t);
-            return t;
+
+        public void RestartCurrent(){
+            if(isTween)
+                currentTween.Restart();
+            else
+                currentSequence.Restart();
         }
-    
-        /*
-        Removes a Twequence from my List.
-        Attach to either the OnKill or OnComplete Action.
-        */
-        protected void RemoveTwequence(Twequence twequence){
-            twequences.Remove(twequence);
+
+        public bool IsCurrentPlaying(){
+            if(isTween)
+                return currentTween.IsPlaying();
+            else 
+                return currentSequence.IsPlaying();
         }
     }
 }
