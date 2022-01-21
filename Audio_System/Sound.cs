@@ -1,33 +1,33 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Audio_System
 {
-    /// <summary>
-    /// The sound, song, noise, etc. to play.
-    /// </summary>
-    [System.Serializable]
-    public class Sound
+    [CreateAssetMenu(fileName = "Sound", menuName = "Audio System")]
+    public class Sound : ScriptableObject
     {
-        public string tag;
-
-        [Header("Attached Source")]
-        //either add a source yourself
-        public AudioSource source;
-
-        [Header("Detached Source")]
-        //or make one
         public AudioClip clip;
+        public AudioMixerGroup mixerGroup;
+        
+        public bool loop, mute, byPassEffects, byPassListenerEffects, 
+            byPassReverbZones, playOnAwake;
+
         [Range(0, 256)]
         public int priority = 128;
-        [Range(0f, 1f)]
-        public float volume = 1f, spatialBlend = 0f;
-        [Range(-3f, 3f)]
-        public float pitch = 1f;
-        [Range(-1f, 1f)]
-        public float stereoPan = 0f;
-        [Range(0f, 1.1f)]
-        public float reverbZoneMix = 1f;
 
-        public bool mute, bypassEffects, bypassListenerEffects, bypassReverbZones, playOnAwake, loop;
+        [Range(0, 1)]
+        public float volume = 1;
+
+        [Range(-3, 3)]
+        public float pitch = 1;
+
+        [Range(-1, 1)]
+        public float stereoPan = 0;
+
+        [Range(0, 1)]
+        public float spatialBlend = 0;
+
+        [Range(0, 1.1f)]
+        public float reverbZoneMix = 1;
     }
 }
