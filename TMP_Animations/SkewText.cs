@@ -2,9 +2,9 @@ using UnityEngine;
 using TMPro;
 
 namespace TMPAnimations{
-    /*
-    Skews and Shears text along an animation curve
-    */
+    /// <summary>
+    /// Skews and Shears text along an animation curve.
+    /// </summary>
     [RequireComponent(typeof(TMP_Text))]
     public class SkewText : MonoBehaviour
     {

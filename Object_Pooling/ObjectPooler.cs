@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using NoMoney_Core;
 
 namespace ObjectPooling{
-    /*
-    Generates pools of objects to pull from.
-    */
+    /// <summary>
+    /// Generates pools of objects to pull from.
+    /// </summary>
     public class ObjectPooler : Singleton<ObjectPooler>
     {
 #region Serialization
@@ -36,11 +37,16 @@ namespace ObjectPooling{
             }
         }
 
-        /*
-        Spawns an object from the dictionary.
-        */
-        public GameObject SpawnObject(string tag, Vector3 position, Quaternion rotation, GameObject manager){
-            GameObject g = poolBook[tag].Dequeue();
+        /// <summary>
+        /// Spawns an object from the dictionary.
+        /// </summary>
+        /// <param name="key">Object key in the dictionary.</param>
+        /// <param name="position">Position of the spawned object.</param>
+        /// <param name="rotation">Rotation of the spawned object.</param>
+        /// <param name="manager">GameObject that spawned the object.</param>
+        /// <returns></returns>
+        public GameObject SpawnObject(string key, Vector3 position, Quaternion rotation, GameObject manager){
+            GameObject g = poolBook[key].Dequeue();
             g.transform.SetParent(null);
             g.transform.position = position;
             g.transform.rotation = rotation;
@@ -49,12 +55,14 @@ namespace ObjectPooling{
             return g;
         }
 
-        /*
-        Despawns an object, returns it to the dictionary.
-        */
-        public void DespawnObject(string tag, GameObject gameObject){
+        /// <summary>
+        /// Despawns the object, returning it to the dictionary.
+        /// </summary>
+        /// <param name="key">Key for the object.</param>
+        /// <param name="gameObject">The object to despawn.</param>
+        public void DespawnObject(string key, GameObject gameObject){
             gameObject.SetActive(false);
-            poolBook[tag].Enqueue(gameObject);
+            poolBook[key].Enqueue(gameObject);
             gameObject.transform.SetParent(transform);
             gameObject.GetComponent<ISpawnable>().Despawn();
         }
