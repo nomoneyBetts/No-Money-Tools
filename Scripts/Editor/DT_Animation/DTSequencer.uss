@@ -1,0 +1,121 @@
+:root{
+	--tween-height: 220px;
+}
+
+Button{
+	width: auto;
+	border-radius: 5px;
+}
+
+Toggle > Label, ObjectField > Label{
+	min-width: auto;
+	margin-right: 3px;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.header{
+	flex-direction: row;
+	justify-content: space-between;
+	align-content: center;
+	padding: 5px;
+	border-bottom-color: #000000;
+	border-bottom-width: 1px;
+}
+
+#header-buttons{
+	flex-direction: row;
+	justify-content: center;
+}
+
+#sequencer-name{
+	min-width: 50px;
+	max-width: 30%;
+	flex-grow: 1;
+}
+
+#sequencer-body{
+	height: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#create-sequence-button{
+	align-self: flex-end;
+}
+
+#sequence-container{
+	flex-direction: column;
+	flex-grow: 1;
+	border-right-width: 1px;
+	border-right-color: #000000;
+	align-content: center;
+}
+
+.sequence{
+	margin: 5px;
+	padding: 5px;
+	background-color: #555555;
+	border-radius: 5px;
+	height: var(--tween-height);
+}
+
+#tween-container{
+	flex-grow: 2;
+	flex-direction: column;
+	width: 50%;
+}
+
+.tween-header{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.tween-list{
+	flex-direction: row;	
+	margin: 5px;
+	height: var(--tween-height);
+}
+
+.tween{
+	height: 100%;
+	background-color: #555555;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 2px;
+	width: 286px;
+}
+
+.start-end-field{
+	justify-content: space-between;
+}
+
+.start-end-group{
+	flex-direction: column;
+	width: 50%;
+}
+
+.start-end-label{
+	align-self: center;
+}
+
+.tween-joiner{
+	flex-direction: row;
+	border-color: #FFD700;
+	border-width: 2px;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-radius: 5px;
+	padding-bottom: 4px;
+}
+
+.sequence-joiner{
+	flex-direction: column;
+	border-color: #FFD700;
+	border-width: 2px;
+	margin: 2px;
+	border-radius: 5px;
+	padding-bottom: 4px;
+}

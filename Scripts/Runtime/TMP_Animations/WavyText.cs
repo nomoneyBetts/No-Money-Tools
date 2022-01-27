@@ -2,9 +2,9 @@ using UnityEngine;
 using TMPro;
 
 namespace TMPAnimations{
-    /*
-    Animates text along a Sin Wave as to appear wavy.
-    */
+    /// <summary>
+    /// Animates text along a Sin Wave as to appear wavy.
+    /// </summary>
     [RequireComponent(typeof(TMP_Text))]
     public class WavyText : MonoBehaviour
     {
