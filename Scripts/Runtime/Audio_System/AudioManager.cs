@@ -6,6 +6,8 @@ namespace Audio_System
 {
     public class AudioManager : Singleton<AudioManager>
     {
+        [SerializeField]
+        private string soundPaths;
         public List<Sound> tempSounds;
         private List<AudioSource> activeSources;
         private Dictionary<string, Sound> sounds;

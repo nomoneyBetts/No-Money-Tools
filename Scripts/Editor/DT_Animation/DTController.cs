@@ -31,7 +31,7 @@ namespace DT_Animation
         /// <returns>The path to the Asset found or null</returns>
         private string FindData(string name)
         {
-            string[] files = Directory.GetFiles(SequencerVals.sequencerLibrary);
+            string[] files = Directory.GetFiles(LibrariesAccessor.seqLib);
             foreach (string file in files)
             {
                 if (name == Path.GetFileNameWithoutExtension(file))
@@ -71,7 +71,7 @@ namespace DT_Animation
                     activeData = ScriptableObject.CreateInstance<SequencerData>();
                     activeData.name = sequencerName;
                     activeData.sequences = ControllersToArray();
-                    AssetDatabase.CreateAsset(activeData, $"{SequencerVals.sequencerLibrary}/{activeData.name}.asset");
+                    AssetDatabase.CreateAsset(activeData, $"{LibrariesAccessor.seqLib}/{activeData.name}.asset");
                     AssetDatabase.SaveAssets();
                 }
                 else if (activeData.name == sequencerName && sequencerName == Path.GetFileNameWithoutExtension(foundAsset))
@@ -86,7 +86,7 @@ namespace DT_Animation
                     // Save Rename
                     Debug.Log($"Saving Update and Renaming: {activeData.name} to {sequencerName}");
                     AssetDatabase.RenameAsset(
-                        $"{SequencerVals.sequencerLibrary}/{activeData.name}.asset",
+                        $"{LibrariesAccessor.seqLib}/{activeData.name}.asset",
                         sequencerName
                     );
                     activeData.name = sequencerName;
@@ -149,7 +149,7 @@ namespace DT_Animation
                 else
                 {
                     Debug.Log($"Loading Asset: {sequencerName}");
-                    activeData = AssetDatabase.LoadAssetAtPath<SequencerData>($"{SequencerVals.sequencerLibrary}/{sequencerName}.asset");
+                    activeData = AssetDatabase.LoadAssetAtPath<SequencerData>($"{LibrariesAccessor.seqLib}/{sequencerName}.asset");
                     sequenceControllers.Clear();
                     LoadActiveData();                   
                 }

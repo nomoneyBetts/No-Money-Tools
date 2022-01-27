@@ -7,16 +7,14 @@ namespace Audio_System
     [CustomEditor(typeof(AudioManager))]
     public class AudioManagerInspector : Editor
     {
-        const string soundLibrary = "Assets/no-money-tools/Audio_System/Sound_Library";
-        const string editorStr = "Audio Paths";
-
-        private string soundPaths;
         private AudioManager manager;
+        private SerializedProperty paths;
 
         private void OnEnable()
         {
             manager = (AudioManager)target;
-            soundPaths = EditorPrefs.GetString(editorStr);
+            LibrariesAccessor.SetLibrary(LibrariesAccessor.Libraries.Sound_Library);
+            paths = serializedObject.FindProperty("soundPaths");
         }
 
         public override void OnInspectorGUI()
@@ -25,12 +23,10 @@ namespace Audio_System
 
             EditorGUILayout.LabelField("Sound Paths");
             EditorGUI.BeginChangeCheck();
-            soundPaths = EditorGUILayout.TextArea(soundPaths);
+            paths.stringValue = EditorGUILayout.TextArea(paths.stringValue);
             if (EditorGUI.EndChangeCheck())
-            {
-                EditorPrefs.SetString(editorStr, soundPaths);
-                Undo.RecordObject(manager, "Changed Sound Paths");
-                EditorUtility.SetDirty(this);
+            { 
+                serializedObject.ApplyModifiedProperties();
             }
 
             EditorGUILayout.Space();
@@ -39,7 +35,8 @@ namespace Audio_System
             if (GUILayout.Button("Load Sounds"))
             {
                 Debug.Log("Loading Sounds");
-                string[] paths = soundPaths.Split('\n');
+                string soundLibrary = LibrariesAccessor.soundLib;
+                string[] paths = this.paths.stringValue.Split('\n');
 
                 foreach(string path in paths)
                 {
@@ -51,7 +48,7 @@ namespace Audio_System
                     {
                         LoadDirectory(soundLibrary);
                     }
-                    else if(file[file.Length - 1] == '/')
+                    else if(Directory.Exists(file))
                     {
                         // Directory
                         LoadDirectory(file);
@@ -72,7 +69,10 @@ namespace Audio_System
             if(GUILayout.Button("Clear Sounds"))
             {
                 Debug.Log("Clearing Sounds");
-                manager.tempSounds.Clear();
+                if (manager.tempSounds != null)
+                {
+                    manager.tempSounds.Clear();
+                }
             }
             EditorGUILayout.EndHorizontal();
 

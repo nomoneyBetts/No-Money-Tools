@@ -1,7 +1,4 @@
 *.meta
-DT_Animation/Sequencer_Library/*
-Audio_System/Sound_Library/*
-Audio_System/Clip_Library/*
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
@@ -58,7 +55,7 @@ sysinfo.txt
 
 # Builds
 *.apk
-*.unitypackage
+# *.unitypackage
 
 # Crashlytics generated file
 crashlytics-build.properties
