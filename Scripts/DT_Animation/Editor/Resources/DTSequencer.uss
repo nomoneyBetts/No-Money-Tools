@@ -1,0 +1,35 @@
+:root{
+	--value-node-size: 140px;
+}
+
+GridBackground{
+	--grid-background-color: #282828;
+	--line-color: rgba(193, 196, 192, .1);
+	--thick-line-color: rgba(193, 196, 192, .5);
+}
+
+.value-node{
+	width: var(--value-node-size);
+}
+
+.value-node FloatField{
+	flex-grow: 1;
+	margin-right: 0px;
+}
+
+#value-output Port Label{
+	visibility: hidden;
+	width: 0px;
+}
+
+#value-output Port{
+	padding-left: 0px;
+	width: 35%;
+}
+
+#value-output{
+	flex-direction: row-reverse;
+	background-color: #2E2E2E;
+	width: var(--value-node-size);
+	justify-content: space-between;
+}

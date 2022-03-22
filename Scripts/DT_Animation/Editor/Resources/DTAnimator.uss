@@ -1,0 +1,7 @@
+Button{
+    width: 75%;
+    height: 50px;
+    align-self: center;
+    font-size: 20px;
+    -unity-font-style: bold;
+}
