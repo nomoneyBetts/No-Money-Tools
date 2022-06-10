@@ -1,7 +1,13 @@
+:root{
+    flex-direction: row;
+    justify-content: center;
+}
+
 Button{
-    width: 75%;
-    height: 50px;
+    width: auto;
+    flex-grow: 1;
+    height: 30px;
     align-self: center;
-    font-size: 20px;
+    font-size: 15px;
     -unity-font-style: bold;
 }

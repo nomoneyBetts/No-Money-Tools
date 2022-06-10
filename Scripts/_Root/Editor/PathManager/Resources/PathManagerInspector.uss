@@ -1,0 +1,40 @@
+.wrapper{
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#management-wrapper > VisualElement{
+	flex-direction: row;
+	justify-content: center;
+}
+
+#management-wrapper > ToolbarMenu{
+	background-color: #585858;
+	margin: 4px;
+	padding: 2px;
+}
+
+#management-wrapper > ToolbarMenu > TextElement{	
+	font-size: 14px;
+	-unity-text-align: middle-center;
+	-unity-font-style: bold;
+}
+
+#management-wrapper > ToolbarMenu:hover{
+	background-color: #6D6D6D;
+}
+
+#management-wrapper > VisualElement > Button{
+	width: 50%;
+}
+
+#editor-colors-wrapper{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#editor-colors-wrapper ColorField{
+	flex-direction: column;
+	width: 30%;
+	justify-content: center;
+}

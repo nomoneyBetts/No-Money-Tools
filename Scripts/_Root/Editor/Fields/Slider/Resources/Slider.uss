@@ -1,0 +1,32 @@
+:root{
+	flex-direction: row;
+	align-items: center;
+}
+
+#field-title{
+	min-width: 135px;
+	-unity-font-style: normal;
+	font-size: 12px;
+}
+
+#slider-wrapper{
+	flex-grow: 1;
+}
+
+.label-wrapper{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.label-wrapper *{
+	color: #6A6A6A;
+	font-size: 10px;
+}
+
+FloatField{
+	min-width: 50px;
+}
+
+IntegerField{
+	min-width: 50px;
+}

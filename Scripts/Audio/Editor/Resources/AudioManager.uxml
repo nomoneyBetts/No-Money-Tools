@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xmlns:audio="NoMoney.Audio"
+    xmlns:nm="NoMoney"
+    xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
+>    
+    <Style path="Assets/no-money-tools/Scripts/Audio/Editor/Resources/AudioManager.uss"/>
+
+    <audio:DropdownListField title="Loaded Sounds"/>
+
+    <engine:Foldout name="sound-editor" text="Sound Editor">
+        <engine:VisualElement name="header" class="wrapper not-sliders">
+            <editor:ToolbarMenu name="sound-selector"/>
+            <engine:VisualElement class="button-wrapper">
+                <engine:Button name="add-sound" text="Add Sound"/>
+                <engine:Button name="delete-sound" text="Delete Sound"/>
+            </engine:VisualElement>
+            <engine:VisualElement name="name-wrapper">
+                <engine:TextField name="sound-name" label="Name"/>
+                <engine:Button name="submit" text="Submit"/>
+            </engine:VisualElement>
+        </engine:VisualElement>
+
+        <engine:VisualElement name="objects" class="wrapper not-sliders">
+            <editor:ObjectField label="Audio Clip" type="UnityEngine.AudioClip, UnityEngine.AudioModule"/>
+            <editor:ObjectField label="Output" type="UnityEngine.Audio.AudioMixerGroup, UnityEngine.AudioModule"/>
+        </engine:VisualElement>
+        <engine:VisualElement name="bools" class="wrapper not-sliders">
+            <engine:Toggle label="Mute"/>
+            <engine:Toggle label="Bypass Effects"/>
+            <engine:Toggle label="Bypass Listener Effects"/>
+            <engine:Toggle label="Bypass Reverb Zones"/>
+            <engine:Toggle label="Play On Awake"/>
+            <engine:Toggle label="Loop"/>
+        </engine:VisualElement>
+        <engine:VisualElement name="sliders" class="wrapper">
+            <nm:NMSliderInt title="Priority" high-value="256" low-value="0" high-label="Low" low-label="High" value="128"/>
+            <nm:NMSlider title="Volume" high-value="1" low-value="0" value="1"/>
+            <nm:NMSlider title="Pitch" high-value="3" low-value="-3" value="1"/>
+            <nm:NMSlider title="Stereo Pan" high-value="1" low-value="-1" low-label="Left" high-label="Right"/>
+            <nm:NMSlider title="Spatial Blend" high-value="1" low-value="0" low-label="2D" high-label="3D"/>
+            <nm:NMSlider title="Reverb Zone Mix" high-value="1.1" low-value="0" value="1"/>
+        </engine:VisualElement>
+        <engine:VisualElement class="button-wrapper">
+            <engine:Button name="play-sound" text="Play"/>
+            <engine:Button name="stop-sound" text = "Stop"/>
+        </engine:VisualElement>
+        
+    </engine:Foldout>
+
+</engine:UXML>

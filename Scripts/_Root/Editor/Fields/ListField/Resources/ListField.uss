@@ -1,0 +1,40 @@
+.element-wrapper{
+	border-width: 1px;
+	flex-direction: row;
+}
+
+.element-wrapper:hover{
+	background-color: #6D6D6D;
+}
+
+.element-wrapper:focus{
+	border-color: pink;
+}
+
+.element-field{
+	flex-grow: 1;
+}
+
+.element-handle{
+	height: 90%;
+	width: 20px;
+	margin-right: 8px;
+	background-color: #24283F;
+	border-radius: 4px;
+	align-self: center;
+	-unity-text-align: middle-center;
+}
+
+.element-handle:hover{
+	background-color: #373D60;
+}
+
+#buttons-wrapper{
+	flex-direction: row;
+	justify-content: center;
+}
+
+Button{
+	width: auto;
+	flex-grow: 1;
+}

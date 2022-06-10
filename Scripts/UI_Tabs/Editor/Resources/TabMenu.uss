@@ -1,0 +1,35 @@
+#fields{
+	margin-bottom: 1%;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.field-group{
+	align-items: flex-end;
+}
+
+#columns{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.column{
+	flex-shrink: 0;
+	flex-grow: 1;
+}
+
+.event-label{
+	white-space: normal;
+}
+
+#open{
+	margin-right: 3%;
+}
+
+#close{
+	margin-left: 3%;
+}
+
+.column > *{
+	margin-top: 3%;
+}

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
-using NoMoney.NoMoneyEditor;
 
 namespace NoMoney.DTAnimation
 {
@@ -16,37 +15,43 @@ namespace NoMoney.DTAnimation
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("DTAnimator");
             visualTree.CloneTree(inspector);
 
-            inspector.styleSheets.Add(Resources.Load<StyleSheet>("DTAnimator"));
-
             Button editorButton = inspector.Q<Button>("open");
-            editorButton.clicked += () => Sequencer.ShowWindow(serializedObject);
+            editorButton.clicked += () => Sequencer.ShowWindow(serializedObject, this);
 
             Button clearButton = inspector.Q<Button>("clear");
-            clearButton.clicked += () => ClearModel(serializedObject);
+            clearButton.clicked += () => ClearModel();
 
             return inspector;
         }
 
-        public static void ClearModel(SerializedObject serializedObject)
+        public void ClearModel()
         {
             List<Vertex> vertices = (List<Vertex>)serializedObject.FindProperty("_vertices").GetValue();
             foreach(Vertex vertex in vertices)
             {
-                if(vertex == null)
-                {
-                    continue;
-                }
+                if (vertex == null) continue;
+
                 // Destroy out connections
-                foreach(Connection cnx in vertex.GetOutputs())
+                foreach (Connection cnx in vertex.Outputs)
                 {
+                    if (cnx == null) continue;
                     cnx.DestroyCnx();
                 }
 
                 // Destroy the vertex
                 vertex.DestroyVertex();
             }
-            serializedObject.FindProperty("_vertices").SetValue(new List<Vertex>());
-            serializedObject.FindProperty("_seqVertices").SetValue(new List<SequenceVertex>());
+
+            List<GroupVertex> groups = (List<GroupVertex>)serializedObject.FindProperty("_groups").GetValue();
+            foreach(GroupVertex group in groups)
+            {
+                if (group == null) continue;
+                group.DestroyVertex();
+            }
+
+            ((List<Vertex>)serializedObject.FindProperty("_vertices").GetValue()).Clear();
+            ((StringVertexDict)serializedObject.FindProperty("_seqVertices").GetValue()).Clear();
+            ((List<GroupVertex>)serializedObject.FindProperty("_groups").GetValue()).Clear();
         }
     }
 }

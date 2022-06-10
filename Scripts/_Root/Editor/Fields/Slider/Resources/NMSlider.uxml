@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
+>
+    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/Slider/Resources/Slider.uss"/>
+
+    <engine:VisualElement name="slider-wrapper">
+        <engine:VisualElement name="value-labels" class="label-wrapper">
+            <engine:Label name="low-value"/>
+            <engine:Label name="high-value"/>
+        </engine:VisualElement>
+        <engine:Slider/>
+        <engine:VisualElement class="label-wrapper">
+            <engine:Label name="low-label"/>
+            <engine:Label name="high-label"/>
+        </engine:VisualElement>
+    </engine:VisualElement>
+
+    <editor:FloatField/>
+    
+</engine:UXML>

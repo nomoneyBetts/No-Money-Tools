@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace NoMoney.DTAnimation
@@ -7,18 +5,19 @@ namespace NoMoney.DTAnimation
     public class Connection : ScriptableObject
     {
         public string PortName, CnxPort;
-        public Vertex CnxVertex;
+        public Vertex Cnx, TargetCnx;
 
         public void SetVals(string portName, string cnxPort, Vertex cnxVertex)
         {
             PortName = portName;
             CnxPort = cnxPort;
-            CnxVertex = cnxVertex;
+            Cnx = cnxVertex;
+            TargetCnx = cnxVertex;
         }
 
         public bool ValsMatch(string portName, string cnxPort, Vertex cnxVertex)
         {
-            return portName == PortName && CnxPort == cnxPort && cnxVertex == CnxVertex;
+            return portName == PortName && CnxPort == cnxPort && cnxVertex == Cnx;
         }
 
         public void DestroyCnx()

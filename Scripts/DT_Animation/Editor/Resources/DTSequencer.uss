@@ -1,5 +1,19 @@
-:root{
-	--value-node-size: 140px;
+.node{
+	min-width: 100px;
+	width: auto;
+	max-width: 250px;
+}
+
+.node #contents{
+	width: 100%;
+}
+
+.node #value-output{
+	width: 100%;
+}
+
+Port{
+	width: auto;
 }
 
 GridBackground{
@@ -8,11 +22,12 @@ GridBackground{
 	--thick-line-color: rgba(193, 196, 192, .5);
 }
 
+/*Value Node*/
 .value-node{
 	width: var(--value-node-size);
 }
 
-.value-node FloatField{
+.value-field{
 	flex-grow: 1;
 	margin-right: 0px;
 }
@@ -32,4 +47,26 @@ GridBackground{
 	background-color: #2E2E2E;
 	width: var(--value-node-size);
 	justify-content: space-between;
+}
+
+/*Getter Node*/
+.getter-node #value-output > Label, TMPWrapperNode Label{
+	flex-grow: 1;
+	-unity-text-align: middle-left;
+	margin-left: 3px;
+}
+
+/*Elbow Node*/
+ElbowNode #input > Port > Label, ElbowNode #output > Port > Label{
+	width: 0px;
+	visibility: hidden;
+}
+
+ElbowNode #output{
+	flex-direction: row-reverse;
+}
+
+ElbowNode #output > Label{
+	-unity-text-align: middle-center;
+	margin-left: 5px;
 }

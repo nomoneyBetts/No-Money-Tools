@@ -1,0 +1,29 @@
+#name-wrapper{
+	flex-direction: row;
+}
+
+#sound-name{
+	flex-grow: 1;
+}
+
+#submit{
+	flex-shrink: 1;
+}
+
+.wrapper{
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.button-wrapper{
+	flex-direction: row;
+	justify-content: center;
+}
+
+.button-wrapper Button{
+	flex-grow: 1;
+}
+
+.not-sliders Label{
+	min-width: 140px;
+}

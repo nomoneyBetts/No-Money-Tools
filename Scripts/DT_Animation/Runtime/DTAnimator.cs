@@ -1,33 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace NoMoney.DTAnimation {
+namespace NoMoney.DTAnimation
+{
+    [System.Serializable]
+    internal class StringVertexDict : SerializableDictionary<string, SequenceVertex> { }
+
     public class DTAnimator : MonoBehaviour
     {
+        #region Serialization
         [SerializeField]
         private List<Vertex> _vertices;
         [SerializeField]
-        private List<SequenceVertex> _seqVertices;
+        private List<GroupVertex> _groups;
+        [SerializeField]
+        private StringVertexDict _seqVertices = new StringVertexDict();
+        #endregion
+
         private Dictionary<string, Sequence> _sequenceBook;
 
         private void Awake()
         {
-            GenerateSequences();
+            if (_sequenceBook == null) GenerateSequences();
         }
 
         private void GenerateSequences()
         {
             _sequenceBook = new Dictionary<string, Sequence>();
-            foreach(SequenceVertex seqVertex in _seqVertices)
+            foreach (SequenceVertex seqVertex in _seqVertices.Values)
             {
                 _sequenceBook.Add(seqVertex.SequenceName, null);
-                if (seqVertex.DynamicGeneration)
-                {
-                    _sequenceBook[seqVertex.SequenceName].SetAutoKill(true);
-                }
-                else
+                if (!seqVertex.DynamicGeneration)
                 {
                     Sequence sequence = GenerateSequence(seqVertex.SequenceName);
                     sequence.SetAutoKill(false);
@@ -35,36 +39,16 @@ namespace NoMoney.DTAnimation {
                 }
             }
         }
-    
+
         private Sequence GenerateSequence(string name)
         {
-            SequenceVertex seqVertex = _seqVertices.Find(v => v.SequenceName == name);
-            if(seqVertex == null)
-            {
-                return null;
-            }
-            Sequence sequence = DOTween.Sequence();
-            TwequenceVertex curVertex = seqVertex;
-            while (curVertex != null)
-            {
-                if (curVertex is TweenVertex tweVertex)
-                {
-                    sequence.Append(tweVertex.GenerateTween(transform));
-                }
-                Connection output = curVertex.GetOutput();
-                if (output == null)
-                {
-                    break;
-                }
-                curVertex = (TwequenceVertex)output.CnxVertex;
-            }
-            _sequenceBook[name] = sequence;
-            return sequence;
+            SequenceVertex seqVertex = _seqVertices[name];
+            return seqVertex == null ? null : seqVertex.GenerateSequence();
         }
 
         public void StartSequence(string sequenceName)
         {
-            Sequence sequence = _sequenceBook[sequenceName].IsActive() ? 
+            Sequence sequence = _sequenceBook[sequenceName].IsActive() ?
                 _sequenceBook[sequenceName] : GenerateSequence(sequenceName);
             sequence.Restart();
         }

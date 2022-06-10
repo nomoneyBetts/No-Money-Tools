@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
+    class="list-field"
+>
+    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/ListField/Resources/ListField.uss"/>
+
+    <engine:Foldout>
+        <engine:VisualElement name="elements"/>
+        <engine:VisualElement name="buttons-wrapper">
+            <engine:Button name="add-element" text="+"/>
+            <engine:Button name="remove-element" text="-"/>
+        </engine:VisualElement>
+    </engine:Foldout>
+</engine:UXML>

@@ -1,4 +1,6 @@
 *.asset
+/NM-Database/
+/NM-Database.meta
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #

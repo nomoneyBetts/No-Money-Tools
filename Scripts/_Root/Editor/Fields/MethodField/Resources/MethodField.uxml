@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:engine="UnityEngine.UIElements"
+    xmlns:editor="UnityEditor.UIElements"
+    xmlns:nomoney="NoMoney"
+    xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
+>
+    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/MethodField/Resources/MethodField.uss"/>
+
+    <editor:ObjectField name="target" type="UnityEngine.Object, UnityEngine.CoreModule"/>
+    <editor:ToolbarMenu name="selector" text="UNSET"/>
+    <nomoney:MethodParameterListField name="parameters" additive="false" arrangeable="false" title="Parameters"/>
+</engine:UXML>

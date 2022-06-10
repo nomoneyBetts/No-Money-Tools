@@ -5,46 +5,52 @@ namespace NoMoney.DTAnimation
 {
     public abstract class ValueVertex<T> : Vertex 
     {
-        public List<Connection> Outputs = new List<Connection>();
-
-        public T Value;
-
-        public override void ConnectVertex(string portName, string cnxPort, Vertex vertex)
+        [SerializeField]
+        private T _value;
+        public T Value
         {
-            if (portName == "Output")
+            get
             {
-                Connection cnx = CreateInstance<Connection>();
-                cnx.SetVals(portName, cnxPort, vertex);
-                Outputs.Add(cnx);
+                if(this is GetterVertex<T> getter)
+                {
+                    return getter.GetValue();
+                }
+                return _value;
             }
-            else
+            set
             {
-                Debug.LogWarning("Connecting to unknown port name on Value Node: " + portName);
-            }
-        }
-
-        public override void DisconnectVertex(string portName, string cnxPort, Vertex vertex)
-        {
-            Connection cnx = Outputs.Find(c => c.ValsMatch(portName, cnxPort, vertex));
-            if (cnx != null)
-            {
-                cnx.DestroyCnx();
-                Outputs.Remove(cnx);
-            }
-            else
-            {
-                Debug.LogWarning("Attempting to disconnect vertices that aren't connected");
+                _value = value;
             }
         }
 
-        public override List<Connection> GetInputs()
+        [SerializeField]
+        private List<Connection> _outputs = new List<Connection>();
+
+        public override List<Connection> Outputs => _outputs;
+        public override List<Connection> Inputs => new List<Connection>(0);
+
+        public override bool ConnectVertex(string portName, string cnxPort, Vertex vertex)
         {
-            throw new System.NotImplementedException();
+            if(portName == "Output")
+            {
+                Connection output = CreateInstance<Connection>();
+                output.SetVals(portName, cnxPort, vertex);
+                _outputs.Add(output);
+                return true;
+            }
+            return false;
         }
 
-        public override List<Connection> GetOutputs()
+        public override bool DisconnectVertex(string portName, string cnxPort, Vertex vertex)
         {
-            return Outputs;
+            Connection output;
+            if((output = _outputs.Find(o => o.ValsMatch(portName, cnxPort, vertex))) != null)
+            {
+                output.DestroyCnx();
+                _outputs.Remove(output);
+                return true;
+            }
+            return false;
         }
     }
 }
