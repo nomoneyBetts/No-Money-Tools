@@ -6,6 +6,11 @@
     xmlns:nomoney="NoMoney"
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
 >
+    <engine:VisualElement name="bezier-warning">
+        <engine:Label class="attention" text="ATTENTION"/>
+        <engine:Label class="explanation" text="Bezier Curves are Experimental"/>
+    </engine:VisualElement>
+
     <engine:VisualElement name="management-wrapper" class="wrapper">
         <editor:ToolbarMenu text="NONE"/>
         <engine:VisualElement>

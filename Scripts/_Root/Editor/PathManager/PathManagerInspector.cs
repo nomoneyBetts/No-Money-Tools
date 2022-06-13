@@ -480,6 +480,14 @@ namespace NoMoney
             if (_selectedCurve == null) return;
             VisualElement pathSettings = _inspector.Q<VisualElement>(PathSettingsWrapper);
 
+            // Bezier Warnning
+            VisualElement warning = _inspector.Q<VisualElement>("bezier-warning");
+            warning.style.height = _selectedCurve.PType == PathType.CubicBezier ?
+                new StyleLength(StyleKeyword.Auto) :
+                new StyleLength(0f);
+            warning.style.visibility = _selectedCurve.PType == PathType.CubicBezier ?
+                Visibility.Visible : Visibility.Hidden;
+
             // Alpha
             VisualElement alpha = pathSettings.ElementAt(7);
             alpha.style.height = _selectedCurve.PType == PathType.CatmullRom ?
