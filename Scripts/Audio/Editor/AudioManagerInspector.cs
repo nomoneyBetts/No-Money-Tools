@@ -459,7 +459,7 @@ namespace NoMoney.Audio
             }
 
             serializedObject.FindProperty(Sounds).SetValue(sounds);
-            serializedObject.FindProperty(LoadedSounds).SetValue(evt.newValue);
+            serializedObject.FindProperty(LoadedSounds).SetValue(loadedSounds);
             if (discardedSounds)
             {
                 DropdownListField field = _inspector.Q<DropdownListField>();
