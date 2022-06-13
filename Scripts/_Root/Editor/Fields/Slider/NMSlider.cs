@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NoMoney
 {
-    public class NMSlider : NoMoneyField<float>
+    public class NMSlider : NMBaseField<float>
     {
         #region Properties
         public float HighValue
@@ -50,6 +50,18 @@ namespace NoMoney
                 labels.style.visibility = value ? Visibility.Visible : Visibility.Hidden;
             }
 
+        }
+
+        public override float value
+        {
+            get => _field.value;
+            set
+            {
+                if (value > HighValue) value = HighValue;
+                if (value < LowValue) value = LowValue;
+                _slider.value = value;
+                _field.value = value;
+            }
         }
         #endregion
 
@@ -106,16 +118,6 @@ namespace NoMoney
             if (newValue < LowValue) newValue = LowValue;
             _slider.SetValueWithoutNotify(newValue);
             _field.SetValueWithoutNotify(newValue);
-        }
-
-        protected override float GetValue() => _field.value;
-
-        protected override void SetValue(float value)
-        {
-            if (value > HighValue) value = HighValue;
-            if (value < LowValue) value = LowValue;
-            _slider.value = value;
-            _field.value = value;
         }
 
         #region UXML Factory

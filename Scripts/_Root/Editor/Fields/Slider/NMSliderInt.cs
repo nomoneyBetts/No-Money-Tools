@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NoMoney
 {
-    public class NMSliderInt : NoMoneyField<int>
+    public class NMSliderInt : NMBaseField<int>
     {
         #region Properties
         public int HighValue
@@ -50,6 +50,18 @@ namespace NoMoney
                 labels.style.visibility = value ? Visibility.Visible : Visibility.Hidden;
             }
 
+        }
+
+        public override int value
+        {
+            get => _field.value;
+            set
+            {
+                if (value > HighValue) value = HighValue;
+                if (value < LowValue) value = LowValue;
+                _slider.value = value;
+                _field.value = value;
+            }
         }
         #endregion
 
@@ -101,16 +113,6 @@ namespace NoMoney
             if (newValue < LowValue) newValue = LowValue;
             _slider.SetValueWithoutNotify(newValue);
             _field.SetValueWithoutNotify(newValue);
-        }
-
-        protected override int GetValue() => _field.value;
-
-        protected override void SetValue(int value)
-        {
-            if (value > HighValue) value = HighValue;
-            if (value < LowValue) value = LowValue;
-            _slider.value = value;
-            _field.value = value;
         }
 
         #region UXML Factory

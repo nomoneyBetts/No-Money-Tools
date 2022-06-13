@@ -7,9 +7,10 @@ namespace NoMoney
     /// <summary>
     /// A field for inputing ExposedEvents.
     /// </summary>
-    public class EventField : NoMoneyField<ExposedEvent>
+    public class EventField : NMBaseField<ExposedEvent>
     {
-        // idk why, but this doesn't work.
+        // TODO: Solve the case of EventField Parameter Types.
+        //idk why, but this doesn't work.
         //private Type[] _parameterTypes;
         //public Type[] ParameterTypes
         //{
@@ -20,6 +21,15 @@ namespace NoMoney
         //        UpdateParameters(value);
         //    }
         //}
+
+        public override ExposedEvent value
+        {
+            get => new ExposedEvent
+            {
+                Methods = this.Q<ExposedMethodListField>().value
+            };
+            set => this.Q<ExposedMethodListField>().value = value.Methods;
+        }
 
         public EventField()
         {
@@ -48,19 +58,10 @@ namespace NoMoney
             else listField.SetValueWithoutNotify(newValue.Methods);
         }
 
-        protected override ExposedEvent GetValue()
-        {
-            return new ExposedEvent
-            {
-                Methods = this.Q<ExposedMethodListField>().value
-            };
-        }
-
-        protected override void SetValue(ExposedEvent value)
-        {
-            this.Q<ExposedMethodListField>().value = value.Methods;
-        }
-
+        /// <summary>
+        /// Update all the required parameter types in each of the exposed methods.
+        /// </summary>
+        /// <param name="types"></param>
         private void UpdateParameters(Type[] types)
         {
             ExposedMethodListField listField = this.Q<ExposedMethodListField>();
