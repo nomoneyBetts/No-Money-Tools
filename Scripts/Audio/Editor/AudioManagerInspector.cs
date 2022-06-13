@@ -32,6 +32,7 @@ namespace NoMoney.Audio
             _inspector = new VisualElement();
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("AudioManager");
             visualTree.CloneTree(_inspector);
+            _inspector.styleSheets.Add(Resources.Load<StyleSheet>("AudioManager"));
 
             DropdownListField loadedSounds = _inspector.Q<DropdownListField>();
             loadedSounds.SetValueWithoutNotify(serializedObject.FindProperty(LoadedSounds).GetValue<List<string>>());

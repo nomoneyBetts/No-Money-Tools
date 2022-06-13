@@ -6,8 +6,6 @@
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
     class="list-field"
 >
-    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/ListField/Resources/ListField.uss"/>
-
     <engine:Foldout>
         <engine:VisualElement name="elements"/>
         <engine:VisualElement name="buttons-wrapper">

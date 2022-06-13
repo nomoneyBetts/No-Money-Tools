@@ -14,6 +14,7 @@ namespace NoMoney.DTAnimation
 
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("DTAnimator");
             visualTree.CloneTree(inspector);
+            inspector.styleSheets.Add(Resources.Load<StyleSheet>("DTAnimator"));
 
             Button editorButton = inspector.Q<Button>("open");
             editorButton.clicked += () => Sequencer.ShowWindow(serializedObject, this);

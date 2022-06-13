@@ -90,6 +90,7 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("MethodField");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("MethodField"));
 
             // Register Target Field change
             this.Q<ObjectField>(Target).RegisterValueChangedCallback(evt =>

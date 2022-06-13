@@ -5,8 +5,6 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
 >
-    <Style path="Assets/no-money-tools/Scripts/DT_Animation/Editor/Resources/DTAnimator.uss"/>
-
     <engine:Button name="open" text="Open Editor" />
     <engine:Button name="clear" text="Clear Model" />
 </engine:UXML>

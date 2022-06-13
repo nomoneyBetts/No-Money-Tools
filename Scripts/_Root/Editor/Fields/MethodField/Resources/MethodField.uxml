@@ -6,8 +6,6 @@
     xmlns:nomoney="NoMoney"
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
 >
-    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/MethodField/Resources/MethodField.uss"/>
-
     <editor:ObjectField name="target" type="UnityEngine.Object, UnityEngine.CoreModule"/>
     <editor:ToolbarMenu name="selector" text="UNSET"/>
     <nomoney:MethodParameterListField name="parameters" additive="false" arrangeable="false" title="Parameters"/>

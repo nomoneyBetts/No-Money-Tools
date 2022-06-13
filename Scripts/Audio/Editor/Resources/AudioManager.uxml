@@ -7,8 +7,6 @@
     xmlns:nm="NoMoney"
     xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
 >    
-    <Style path="Assets/no-money-tools/Scripts/Audio/Editor/Resources/AudioManager.uss"/>
-
     <audio:DropdownListField title="Loaded Sounds"/>
 
     <engine:Foldout name="sound-editor" text="Sound Editor">

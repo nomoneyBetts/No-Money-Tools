@@ -72,6 +72,7 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("NMSlider");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("Slider"));
 
             _slider = this.Q<Slider>();
             _slider.RegisterValueChangedCallback(evt =>

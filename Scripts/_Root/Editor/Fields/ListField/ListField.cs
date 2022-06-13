@@ -152,6 +152,7 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("ListField");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("ListField"));
 
             VisualElement elements = this.Q<VisualElement>(Elements);
             // Set drag events

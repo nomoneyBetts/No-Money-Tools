@@ -5,9 +5,6 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd"
 >
-
-    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/Fields/Slider/Resources/Slider.uss"/>
-
     <engine:VisualElement name="slider-wrapper">
         <engine:VisualElement name="value-labels" class="label-wrapper">
             <engine:Label name="low-value"/>
