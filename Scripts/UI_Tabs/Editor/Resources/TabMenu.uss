@@ -11,6 +11,8 @@
 #columns{
 	flex-direction: row;
 	justify-content: space-between;
+	border-top-width: 1px;
+	border-color: black;
 }
 
 .column{
@@ -24,6 +26,8 @@
 
 #open{
 	margin-right: 3%;
+	border-right-width: 1px;
+	border-color: black;
 }
 
 #close{

@@ -6,7 +6,6 @@
     xmlns:nomoney="NoMoney"
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
 >
-    <Style path="Assets/no-money-tools/Scripts/_Root/Editor/PathManager/Resources/PathManagerInspector.uss"/>
     <engine:VisualElement name="management-wrapper" class="wrapper">
         <editor:ToolbarMenu text="NONE"/>
         <engine:VisualElement>

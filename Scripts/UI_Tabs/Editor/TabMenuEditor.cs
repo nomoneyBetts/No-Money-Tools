@@ -25,6 +25,7 @@ namespace NoMoney.UITabs
             VisualElement inspector = new VisualElement();
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("TabMenu");
             visualTree.CloneTree(inspector);
+            inspector.styleSheets.Add(Resources.Load<StyleSheet>("TabMenu"));
 
             #region Settings
             IntegerField intField = inspector.Q<IntegerField>(LandingTab);

@@ -6,8 +6,6 @@
     xmlns:nm="NoMoney"
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
 >
-    <Style path="Assets/no-money-tools/Scripts/UI_Tabs/Editor/Resources/TabMenu.uss"/>
-
     <engine:VisualElement name="fields">
         <engine:VisualElement class="field-group">
             <editor:IntegerField name="landing-tab" label="Landing Tab"/>

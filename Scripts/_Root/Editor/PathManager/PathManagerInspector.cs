@@ -43,6 +43,7 @@ namespace NoMoney
 
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("PathManagerInspector");
             visualTree.CloneTree(_inspector);
+            _inspector.styleSheets.Add(Resources.Load<StyleSheet>("PathManagerInspector"));
             _waypoints = (Vector3ListField)_inspector.Q<VisualElement>(WaypointsWrapper).ElementAt(0);
 
             // Wire buttons
