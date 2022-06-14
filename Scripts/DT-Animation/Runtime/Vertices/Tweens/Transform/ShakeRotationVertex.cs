@@ -39,7 +39,7 @@ namespace NoMoney.DTAnimation
                 .DOShakeRotation(duration, strength, vibrato, randomness, fade)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

@@ -39,7 +39,7 @@ namespace NoMoney.DTAnimation
                 .DOPunchAnchorPos(punch, duration, vibrato, elasticity, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

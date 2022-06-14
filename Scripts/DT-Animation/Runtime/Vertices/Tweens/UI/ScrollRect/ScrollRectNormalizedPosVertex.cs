@@ -36,7 +36,7 @@ namespace NoMoney.DTAnimation
                 .DONormalizedPos(end, duration, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

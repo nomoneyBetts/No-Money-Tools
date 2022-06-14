@@ -39,7 +39,7 @@ namespace NoMoney.DTAnimation
                 .DOShapeCircle(center, endValue, duration, relCenter, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

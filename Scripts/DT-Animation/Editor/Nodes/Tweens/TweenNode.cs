@@ -21,6 +21,7 @@ namespace NoMoney.DTAnimation
             CreateNodePort("Duration", Orientation.Horizontal, Direction.Input, typeof(float));
             CreateNodePort("Delay", Orientation.Horizontal, Direction.Input, typeof(float));
             CreateNodePort("Ease", Orientation.Horizontal, Direction.Input, typeof(Ease));
+            CreateNodePort("Loops", Orientation.Horizontal, Direction.Input, typeof(int));
 
             if (this is PathNode) return;
             CreateNodePort("Target", Orientation.Horizontal, Direction.Input, typeof(Object));

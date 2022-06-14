@@ -35,7 +35,7 @@ namespace NoMoney.DTAnimation
                 .DOBlendableRotateBy(by, duration, mode)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             target.rotation = Quaternion.Euler(_value);

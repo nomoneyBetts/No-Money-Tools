@@ -11,7 +11,7 @@ namespace NoMoney.DTAnimation
         public Object DefaultTarget;
 
         [SerializeField]
-        protected Connection OutputCnx, DurationCnx, DelayCnx, EaseCnx, TargetCnx;
+        protected Connection OutputCnx, DurationCnx, DelayCnx, EaseCnx, TargetCnx, LoopCnx;
         [SerializeField]
         private List<Connection> Events = new List<Connection>();
         [SerializeField]
@@ -43,7 +43,7 @@ namespace NoMoney.DTAnimation
         public abstract Tween GenerateTween();
 
         /// <summary>
-        /// Returns the object's value to before it was tweened.
+        /// Sets the object's value to before it was tweened.
         /// </summary>
         public abstract void SetDefaultValue();
 
@@ -75,6 +75,10 @@ namespace NoMoney.DTAnimation
                 case "Output":
                     if (OutputCnx == null) OutputCnx = CreateInstance<Connection>();
                     cnx = OutputCnx;
+                    break;
+                case "Loops":
+                    if (LoopCnx == null) LoopCnx = CreateInstance<Connection>();
+                    cnx = LoopCnx;
                     break;
                 default:
                     return false;
@@ -136,6 +140,14 @@ namespace NoMoney.DTAnimation
                         return true;
                     }
                     break;
+                case "Loops":
+                    if(LoopCnx != null && LoopCnx.ValsMatch(portName, cnxPort, vertex))
+                    {
+                        LoopCnx.DestroyCnx();
+                        LoopCnx = null;
+                        return true;
+                    }
+                    break;
             }
             return false;
         }
@@ -150,7 +162,8 @@ namespace NoMoney.DTAnimation
                 "Delay" => DelayCnx,
                 "Ease" => EaseCnx,
                 "Target" => TargetCnx,
-                _ => null,
+                "Loops" => LoopCnx,
+                _ => null
             };
             if (cnx != null) cnx.TargetCnx = target;
         }
@@ -167,11 +180,14 @@ namespace NoMoney.DTAnimation
         }
 
         /// <summary>
-        /// Sets the ease for the tween from the vertex's inputs.
+        /// Sets the ease and loops for the tween from the vertex's inputs.
         /// </summary>
         /// <param name="tween"></param>
-        protected void SetEase(Tween tween)
+        protected void SetEaseAndLoops(Tween tween)
         {
+            int loops = LoopCnx == null ? 0 : ((ValueVertex<int>)LoopCnx.TargetCnx).Value;
+            tween.SetLoops(loops);
+
             if (EaseCnx == null)
             {
                 tween.SetEase(Ease.Unset);

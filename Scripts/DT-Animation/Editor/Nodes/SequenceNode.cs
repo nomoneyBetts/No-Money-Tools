@@ -9,6 +9,8 @@ namespace NoMoney.DTAnimation
         {
             title = "Sequence Node";
             CreateNodePort("Output", Orientation.Horizontal, Direction.Output, typeof(Node));
+            CreateNodePort("Input", Orientation.Horizontal, Direction.Input, typeof(Node));
+            CreateNodePort("Loops", Orientation.Horizontal, Direction.Input, typeof(int));
             CreateNodePort("Events", Orientation.Horizontal, Direction.Input, typeof(ExposedEvent));
 
             TextField nameField = new TextField();

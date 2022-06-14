@@ -39,7 +39,7 @@ namespace NoMoney.DTAnimation
                 .DOCounter(start, end, duration, separator, info)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

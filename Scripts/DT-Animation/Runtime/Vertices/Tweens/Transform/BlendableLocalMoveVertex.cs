@@ -35,7 +35,7 @@ namespace NoMoney.DTAnimation
                 .DOBlendableLocalMoveBy(by, duration, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             target.localPosition = _value;

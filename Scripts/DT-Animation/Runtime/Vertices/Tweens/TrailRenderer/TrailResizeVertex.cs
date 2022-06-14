@@ -36,7 +36,7 @@ namespace NoMoney.DTAnimation
                 .DOResize(start, end, duration)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             target.startWidth = _sWidth;

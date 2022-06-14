@@ -13,7 +13,7 @@ namespace NoMoney.DTAnimation
         [SerializeField]
         private List<Connection> _events = new List<Connection>();
         [SerializeField]
-        private Connection _outputCnx;
+        private Connection _outputCnx, _loopCnx, _inputCnx;
 
         public Connection OutputCnx => _outputCnx;
         public override List<Connection> Outputs
@@ -42,6 +42,18 @@ namespace NoMoney.DTAnimation
                 _outputCnx.SetVals(portName, cnxPort, vertex);
                 return true;
             }
+            else if(portName == "Loops")
+            {
+                if (_loopCnx == null) _loopCnx = CreateInstance<Connection>();
+                _loopCnx.SetVals(portName, cnxPort, vertex);
+                return true;
+            }
+            else if(portName == "Input")
+            {
+                if (_inputCnx == null) _inputCnx = CreateInstance<Connection>();
+                _inputCnx.SetVals(portName, cnxPort, vertex);
+                return true;
+            }
             return false;
         }
 
@@ -63,6 +75,18 @@ namespace NoMoney.DTAnimation
                 _outputCnx = null;
                 return true;
             }
+            else if(_loopCnx != null && _loopCnx.ValsMatch(portName, cnxPort, vertex))
+            {
+                _loopCnx.DestroyCnx();
+                _loopCnx = null;
+                return true;
+            }
+            else if (_inputCnx != null && _inputCnx.ValsMatch(portName, cnxPort, vertex))
+            {
+                _inputCnx.DestroyCnx();
+                _inputCnx = null;
+                return true;
+            }
             return false;
         }
 
@@ -70,7 +94,8 @@ namespace NoMoney.DTAnimation
         {
             Sequence sequence = DOTween.Sequence();
             SetEvents(sequence);
-            sequence.SetAutoKill(false);
+            int loops = _loopCnx == null ? 0 : ((ValueVertex<int>)_loopCnx.TargetCnx).Value;
+            sequence.SetLoops(loops);
             GenerationHelper(this, sequence);
             return sequence;
 
@@ -142,6 +167,10 @@ namespace NoMoney.DTAnimation
                     }
                     return;
                 }
+                else if(curVertex is SequenceVertex seqVertex && seqVertex != this)
+                {
+                    sequence.Append(seqVertex.GenerateSequence());
+                }
 
                 if (curVertex is IDeterministicTweenChain link && link.OutputCnx != null)
                 {
@@ -156,6 +185,14 @@ namespace NoMoney.DTAnimation
             {
                 Connection cnx = _events.Find(c => c.Cnx == propogator);
                 if (cnx != null) cnx.TargetCnx = target;
+            }
+            else if(port == "Loops")
+            {
+                if (_loopCnx != null) _loopCnx.TargetCnx = target;
+            }
+            else if(port == "Input")
+            {
+                if (_inputCnx != null) _inputCnx.TargetCnx = target;
             }
         }
     }

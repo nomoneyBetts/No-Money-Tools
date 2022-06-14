@@ -37,7 +37,7 @@ namespace NoMoney.DTAnimation
                 .DOPunchScale(punch, duration, vibrato, elasticity)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

@@ -41,7 +41,7 @@ namespace NoMoney.DTAnimation
                 .DOShakeAnchorPos(duration, shake, vibrato, randomness, snapping, fadeOut)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;
