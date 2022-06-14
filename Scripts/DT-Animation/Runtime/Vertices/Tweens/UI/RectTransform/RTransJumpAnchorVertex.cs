@@ -39,7 +39,7 @@ namespace NoMoney.DTAnimation
                 .DOJumpAnchorPos(end, jumpPower, numJumps, duration, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

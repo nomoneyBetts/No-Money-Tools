@@ -41,7 +41,7 @@ namespace NoMoney.DTAnimation
                 .DOGradientColor(end, duration)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

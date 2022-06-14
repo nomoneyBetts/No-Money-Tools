@@ -1,11 +1,10 @@
 using DG.Tweening;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace NoMoney.DTAnimation
 {
-    [NodeMenuDisplay("Tweens/Transform/Path")]
-    public class PathVertex : TweenVertex
+    [NodeMenuDisplay("Tweens/Rigidbody/Path")]
+    public class RBPathVertex : TweenVertex
     {
         [SerializeField]
         private Connection _curveCnx, _modeCnx, _posConstraintCnx, _rotConstraintCnx, _lookTargetCnx,
@@ -13,27 +12,9 @@ namespace NoMoney.DTAnimation
         private Vector3 _pos;
         private Quaternion _rot;
 
-        public override List<Connection> Inputs
-        {
-            get
-            {
-                List<Connection> list = base.Inputs;
-                if (_curveCnx != null) list.Add(_curveCnx);
-                if (_modeCnx != null) list.Add(_modeCnx);
-                if (_posConstraintCnx != null) list.Add(_posConstraintCnx);
-                if (_rotConstraintCnx != null) list.Add(_rotConstraintCnx);
-                if (_lookAheadCnx != null) list.Add(_lookAheadCnx);
-                if (_lookPosCnx != null) list.Add(_lookPosCnx);
-                if (_lookTargetCnx != null) list.Add(_lookTargetCnx);
-                if (_forwardCnx != null) list.Add(_forwardCnx);
-                if (_upCnx != null) list.Add(_upCnx);
-                return list;
-            }
-        }
-
         public override Tween GenerateTween()
         {
-            Transform target = GetTarget<Transform>(DefaultTarget);
+            Rigidbody target = GetTarget<Rigidbody>(DefaultTarget);
             _pos = target.position;
             _rot = target.rotation;
 
@@ -57,7 +38,7 @@ namespace NoMoney.DTAnimation
             Vector3 lookAtPos = _lookPosCnx == null ? Vector3.zero : ((ValueVertex<Vector3>)_lookPosCnx.TargetCnx).Value;
             Vector3 forward = _forwardCnx == null ? Vector3.forward : ((ValueVertex<Vector3>)_forwardCnx.TargetCnx).Value;
             Vector3 up = _upCnx == null ? Vector3.up : ((ValueVertex<Vector3>)_upCnx.TargetCnx).Value;
-            AxisConstraint posConstraint = _posConstraintCnx == null ? 
+            AxisConstraint posConstraint = _posConstraintCnx == null ?
                 AxisConstraint.None : ((ValueVertex<AxisConstraint>)_posConstraintCnx.TargetCnx).Value;
             AxisConstraint rotConstraint = _rotConstraintCnx == null ?
                 AxisConstraint.None : ((ValueVertex<AxisConstraint>)_rotConstraintCnx.TargetCnx).Value;
@@ -153,7 +134,7 @@ namespace NoMoney.DTAnimation
                     cnx = _curveCnx;
                     break;
                 case "Path Mode":
-                    if (_modeCnx  == null) _modeCnx = CreateInstance<Connection>();
+                    if (_modeCnx == null) _modeCnx = CreateInstance<Connection>();
                     cnx = _modeCnx;
                     break;
                 case "Look-At Target":
@@ -293,7 +274,7 @@ namespace NoMoney.DTAnimation
 
         public override void SetDefaultValue()
         {
-            Transform target = GetTarget<Transform>(DefaultTarget);
+            Rigidbody target = GetTarget<Rigidbody>(DefaultTarget);
             target.position = _pos;
             target.rotation = _rot;
         }

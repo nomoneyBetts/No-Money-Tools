@@ -43,7 +43,7 @@ namespace NoMoney.DTAnimation
                 .DOSpiral(duration, axis, mode, speed, frequency, depth, snapping)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

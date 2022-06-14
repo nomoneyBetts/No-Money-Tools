@@ -37,7 +37,7 @@ namespace NoMoney.DTAnimation
                 .DOLookAt(towards, duration, axis, up)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

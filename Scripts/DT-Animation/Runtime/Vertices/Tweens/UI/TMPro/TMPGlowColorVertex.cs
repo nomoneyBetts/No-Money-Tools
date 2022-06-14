@@ -36,7 +36,7 @@ namespace NoMoney.DTAnimation
                 .DOGlowColor(end, duration, sharedMat)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             return tween;

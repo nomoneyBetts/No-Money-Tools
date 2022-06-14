@@ -33,7 +33,7 @@ namespace NoMoney.DTAnimation
                 .DOBlendableScaleBy(by, duration)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             target.localScale = _value;

@@ -36,7 +36,7 @@ namespace NoMoney.DTAnimation
                 .From(start)
                 .SetDelay(delay)
                 .SetAutoKill(false);
-            SetEase(tween);
+            SetEaseAndLoops(tween);
             SetEvents(tween);
 
             target.shadowStrength = _value;
