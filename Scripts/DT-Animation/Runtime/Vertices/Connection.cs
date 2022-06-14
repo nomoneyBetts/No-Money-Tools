@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using UnityEngine;
 
 namespace NoMoney.DTAnimation
@@ -20,9 +25,11 @@ namespace NoMoney.DTAnimation
             return portName == PortName && CnxPort == cnxPort && cnxVertex == Cnx;
         }
 
+#if UNITY_EDITOR
         public void DestroyCnx()
         {
             DestroyImmediate(this);
         }
+#endif
     }
 }
