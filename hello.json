@@ -1,0 +1,67 @@
+{
+    "Name": "<a href='/_Root'>_Root</a>",
+    "Namespace": "NoMoney",
+    "Description": "_Root houses many of the core building blocks which other systems may rely on and which can be useful in developing your own systems. As stated, while each system is independent of each other, they may be dependent on _Root. Therefore, it is strongly recommended that _Root be the bare minimum that is imported.",
+    "Creator": {
+        "Author": "Austin Betts",
+        "Email": "austin.betts@nomoneystudios.com",
+        "Website": "https://nomoneystudios.com"
+    },
+    "Sub": [
+        {
+            "Name": "<a href='/_Root/Sub/Editor'>Editor</a>",
+            "Creator": {
+                "Author": "Austin Betts",
+                "Email": "austin.betts@nomoneystudios.com"
+            },
+            "Sub": [
+                {
+                    "Name": "<a href='/_Root/Sub/Editor/Sub/Extensions'>Extensions</a>",
+                    "Namespace": "NoMoney",
+                    "Description": null,
+                    "Creator": {
+                        "Author": "Austin Betts",
+                        "Email": "austin.betts@nomoneystudios.com"
+                    },
+                    "Class": [
+                        {
+                            "Name": "<a href='/_Root/Sub/Editor/Sub/Extensions/Class/SerializedPropertyExtensions'>SerializedPropertyExtensions</a>",
+                            "Namespace": "NoMoney",
+                            "Declaration": "<code>public static class SerializedPropertyExtensions</code>",
+                            "Description": "Provide simple value get/set methods for SerializedProperty. Can be used with any data types and with arbitrarily deeply-pathed properties.",
+                            "Constructors": null,
+                            "Properties": null,
+                            "Creator": {
+                                "Author": "Austin Betts",
+                                "Email": "austin.betts@nomoneystudios.com"
+                            },
+                            "Method": [
+                                {
+                                    "Name": "<a href='/_Root/Sub/Editor/Sub/Extensions/Class/SerializedPropertyExtensions/Method/GetValue'>GetValue</a>",
+                                    "Namespace": "NoMoney",
+                                    "Description": "Get the value of the serialized property",
+                                    "Declaration": "<code>public static object GetValue(this <a href='https://docs.unity3d.com/ScriptReference/SerializedProperty.html'>SerializedProperty</a> property)</code>",
+                                    "Creator": {
+                                        "Author": "Austin Betts",
+                                        "Email": "austin.betts@nomoneystudios.com"
+                                    },
+                                    "Parameter": [
+                                        {
+                                            "Type": "<a href='https://docs.unity3d.com/ScriptReference/SerializedProperty.html'>SerializedProperty</a>",
+                                            "Name": "property",
+                                            "Description": "(Extension) The serialized property from which to retrieve a value."
+                                        }
+                                    ],
+                                    "Return": {
+                                        "Type": "object",
+                                        "Description": "The value of the serialized property"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
