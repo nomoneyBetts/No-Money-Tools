@@ -34,7 +34,8 @@
                             "Description": "Provide simple value get/set methods for SerializedProperty. Can be used with any data types and with arbitrarily deeply-pathed properties.",
                             "Creator": {
                                 "Author": "aholkner",
-                                "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b"
+                                "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b",
+                                "Writer": "Austin Betts"
                             },
                             "Method": [
                                 {
@@ -44,7 +45,8 @@
                                     "Declaration": "<code>public static object GetValue(this <a href='https://docs.unity3d.com/ScriptReference/SerializedProperty.html'>SerializedProperty</a> property)</code>",
                                     "Creator": {
                                         "Author": "aholkner",
-                                        "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b"
+                                        "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b",
+                                        "Writer": "Austin Betts"
                                     },
                                     "Parameter": [
                                         {
