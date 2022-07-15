@@ -5,23 +5,26 @@
     "Creator": {
         "Author": "Austin Betts",
         "Email": "austin.betts@nomoneystudios.com",
-        "Website": "https://nomoneystudios.com"
+        "Website": "https://www.instagram.com/nomoney_studios/, https://www.youtube.com/channel/UCHcekF1h9Dy_gfHEOoZ1ZlQ"
     },
     "Sub": [
         {
             "Name": "<a href='/_Root/Sub/Editor'>Editor</a>",
+            "Description": "Subsystems running in the editor.",
             "Creator": {
                 "Author": "Austin Betts",
-                "Email": "austin.betts@nomoneystudios.com"
+                "Email": "austin.betts@nomoneystudios.com",
+                "Website": "https://www.instagram.com/nomoney_studios/, https://www.youtube.com/channel/UCHcekF1h9Dy_gfHEOoZ1ZlQ"
             },
             "Sub": [
                 {
                     "Name": "<a href='/_Root/Sub/Editor/Sub/Extensions'>Extensions</a>",
                     "Namespace": "NoMoney",
-                    "Description": null,
+                    "Description": "Some useful extension methods.",
                     "Creator": {
                         "Author": "Austin Betts",
-                        "Email": "austin.betts@nomoneystudios.com"
+                        "Email": "austin.betts@nomoneystudios.com",
+                        "Website": "https://www.instagram.com/nomoney_studios/, https://www.youtube.com/channel/UCHcekF1h9Dy_gfHEOoZ1ZlQ"
                     },
                     "Class": [
                         {
@@ -29,11 +32,9 @@
                             "Namespace": "NoMoney",
                             "Declaration": "<code>public static class SerializedPropertyExtensions</code>",
                             "Description": "Provide simple value get/set methods for SerializedProperty. Can be used with any data types and with arbitrarily deeply-pathed properties.",
-                            "Constructors": null,
-                            "Properties": null,
                             "Creator": {
-                                "Author": "Austin Betts",
-                                "Email": "austin.betts@nomoneystudios.com"
+                                "Author": "aholkner",
+                                "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b"
                             },
                             "Method": [
                                 {
@@ -42,8 +43,8 @@
                                     "Description": "Get the value of the serialized property",
                                     "Declaration": "<code>public static object GetValue(this <a href='https://docs.unity3d.com/ScriptReference/SerializedProperty.html'>SerializedProperty</a> property)</code>",
                                     "Creator": {
-                                        "Author": "Austin Betts",
-                                        "Email": "austin.betts@nomoneystudios.com"
+                                        "Author": "aholkner",
+                                        "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b"
                                     },
                                     "Parameter": [
                                         {
