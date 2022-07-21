@@ -35,7 +35,6 @@
                             "Creator": {
                                 "Author": "aholkner",
                                 "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b",
-                                "Writer": "Austin Betts"
                             },
                             "Method": [
                                 {
@@ -46,7 +45,6 @@
                                     "Creator": {
                                         "Author": "aholkner",
                                         "Website": "https://gist.github.com/aholkner/214628a05b15f0bb169660945ac7923b",
-                                        "Writer": "Austin Betts"
                                     },
                                     "Parameter": [
                                         {
@@ -61,6 +59,26 @@
                                     }
                                 }
                             ]
+                        }
+                    ]
+                }
+            ],
+            "Enum": [
+                {
+                    "Name": "<a href='/_Root/Sub/Editor/Enum/TestEnum'>TestEnum</a>",
+                    "Description": "A Test Enum",
+                    "Creator": {
+                        "Author": "Austin Betts",
+                        "Email": "austin.betts@nomoneystudios.com",
+                        "Website": "https://www.instagram.com/nomoney_studios/, https://www.youtube.com/channel/UCHcekF1h9Dy_gfHEOoZ1ZlQ"
+                    },
+                    "Property": [
+                        {
+                            "Name": "Ooga",
+                            "Description": "Booga"
+                        },
+                        {
+                            "Name": "Foo"
                         }
                     ]
                 }
