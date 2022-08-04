@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace NoMoney
 {
-    public static class MethodFieldExtensions
+    internal static class MethodFieldExtensions
     {
         public static MethodInfo GetMethod(this Object target, string method)
         {
@@ -19,7 +19,7 @@ namespace NoMoney
             return type.GetMethod(method);
         }
 
-        internal static object[] ToObjArray(this List<MethodParameter> parameters)
+        public static object[] ToObjArray(this List<MethodParameter> parameters)
         {
             object[] obj = new object[parameters.Count];
             int index = 0;
