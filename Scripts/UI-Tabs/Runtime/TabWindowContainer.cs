@@ -14,16 +14,19 @@ namespace NoMoney.UITabs
     {
         [HideInInspector]
         public TabMenu Menu;
+
+        private GameObject[] _windows = null;
         public GameObject[] Windows
         {
             get
             {
-                GameObject[] windows = new GameObject[transform.childCount];
-                for (int i = 0; i < windows.Length; i++)
+                if(_windows != null) return _windows;
+                _windows = new GameObject[transform.childCount];
+                for (int i = 0; i < _windows.Length; i++)
                 {
-                    windows[i] = transform.GetChild(i).gameObject;
+                    _windows[i] = transform.GetChild(i).gameObject;
                 }
-                return windows;
+                return _windows;
             }
         }
 

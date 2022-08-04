@@ -17,16 +17,18 @@ namespace NoMoney.UITabs
         public TabMenu Menu;
         public bool ShowAddButtonWarning = true;
 
+        private GameObject[] _tabs = null;
         public GameObject[] Tabs
         {
             get
             {
-                GameObject[] tabs = new GameObject[transform.childCount];
-                for(int i = 0; i < tabs.Length; i++)
+                if (_tabs != null) return _tabs;
+                _tabs = new GameObject[transform.childCount];
+                for(int i = 0; i < _tabs.Length; i++)
                 {
-                    tabs[i] = transform.GetChild(i).gameObject;
+                    _tabs[i] = transform.GetChild(i).gameObject;
                 }
-                return tabs;
+                return _tabs;
             }
         }
 
