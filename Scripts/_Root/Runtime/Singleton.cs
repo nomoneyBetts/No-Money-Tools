@@ -11,7 +11,7 @@ namespace NoMoney
     /// Derive to create a Singleton.
     /// </summary>
     /// <typeparam name="T">The class name of the child object.</typeparam>
-    public class Singleton<T> : MonoBehaviour
+    public abstract class Singleton<T> : MonoBehaviour
         where T : Component
     {
         private static T s_instance;
@@ -24,9 +24,11 @@ namespace NoMoney
                     T single = FindObjectOfType<T>();
                     if (single == null)
                     {
-                        GameObject g = new GameObject();
-                        g.name = typeof(T).Name;
-                        g.hideFlags = HideFlags.HideAndDontSave;
+                        GameObject g = new()
+                        {
+                            name = typeof(T).Name,
+                            hideFlags = HideFlags.HideAndDontSave
+                        };
                         s_instance = g.AddComponent<T>();
                     }
                     else
