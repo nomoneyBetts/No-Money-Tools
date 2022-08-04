@@ -30,6 +30,37 @@ namespace NoMoney.DTAnimation
             if (_sequenceBook == null) GenerateSequences();
         }
 
+        /// <summary>
+        /// Start a sequence with the given name.
+        /// </summary>
+        /// <param name="sequenceName">The name of the sequence to start.</param>
+        public void StartSequence(string sequenceName)
+        {
+            Sequence sequence = _sequenceBook[sequenceName].IsActive() ?
+                _sequenceBook[sequenceName] : GenerateSequence(sequenceName);
+            if (sequence == null) Debug.LogError("Unable to find Sequence by name: " + sequenceName);
+            else sequence.Restart();
+        }
+
+        /// <summary>
+        /// Toggles pause on the sequence with the given name.
+        /// </summary>
+        /// <param name="sequenceName">The name of the sequence to pause.</param>
+        public void TogglePause(string sequenceName)
+        {
+            if (_sequenceBook[sequenceName].IsActive())
+            {
+                _sequenceBook[sequenceName].TogglePause();
+            }
+        }
+
+        /// <summary>
+        /// Retrieve a stored DoTween.Sequence
+        /// </summary>
+        /// <param name="sequenceName">The name of the sequence to retrieve.</param>
+        /// <returns>DoTween.Sequence</returns>
+        public Sequence GetSequence(string sequenceName) => _sequenceBook[sequenceName];
+
         private void GenerateSequences()
         {
             _sequenceBook = new Dictionary<string, Sequence>();
@@ -49,13 +80,6 @@ namespace NoMoney.DTAnimation
         {
             SequenceVertex seqVertex = _seqVertices[name];
             return seqVertex == null ? null : seqVertex.GenerateSequence();
-        }
-
-        public void StartSequence(string sequenceName)
-        {
-            Sequence sequence = _sequenceBook[sequenceName].IsActive() ?
-                _sequenceBook[sequenceName] : GenerateSequence(sequenceName);
-            sequence.Restart();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace NoMoney
     public class ExposedEvent
     {
         [SerializeField]
-        public List<ExposedMethod> Methods = new List<ExposedMethod>();
+        public List<ExposedMethod> Methods = new();
 
         /// <summary>
         /// Invoke the exposed event.
