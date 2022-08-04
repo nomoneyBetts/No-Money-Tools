@@ -44,35 +44,36 @@ namespace NoMoney.DTAnimation
             {
                 if (evt.modifiers == EventModifiers.Control)
                 {
+                    Vector2 mousePos = _sequencerView.ToGraphPosition(_mousePos);
                     switch (evt.keyCode)
                     {
                         // Menus
                         case KeyCode.P:
-                            _sequencerView.ShowMenuNode(_mousePos, "Renderer");
+                            _sequencerView.ShowMenuNode(mousePos, "Renderer");
                             evt.StopPropagation();
                             break;
                         case KeyCode.C:
-                            _sequencerView.ShowMenuNode(_mousePos, "Camera");
+                            _sequencerView.ShowMenuNode(mousePos, "Camera");
                             evt.StopPropagation();
                             break;
                         case KeyCode.M:
                             // Menu for Material Tweens
-                            _sequencerView.ShowMenuNode(_mousePos, "Material");
+                            _sequencerView.ShowMenuNode(mousePos, "Material");
                             evt.StopPropagation();
                             break;
                         case KeyCode.A:
                             // Menu for Audio Tweens
-                            _sequencerView.ShowMenuNode(_mousePos, "Audio");
+                            _sequencerView.ShowMenuNode(mousePos, "Audio");
                             evt.StopPropagation();
                             break;
                         case KeyCode.T:
                             // Menu for transform tweens
-                            _sequencerView.ShowMenuNode(_mousePos, "Transform");
+                            _sequencerView.ShowMenuNode(mousePos, "Transform");
                             evt.StopPropagation();
                             break;
                         case KeyCode.R:
                             // Menu for Rigidbody tweens
-                            _sequencerView.ShowMenuNode(_mousePos, "Rigidbody");
+                            _sequencerView.ShowMenuNode(mousePos, "Rigidbody");
                             evt.StopPropagation();
                             break;
 
@@ -91,32 +92,32 @@ namespace NoMoney.DTAnimation
                         // Values
                         case KeyCode.F:
                             // Float Value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(FloatValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(FloatValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                         case KeyCode.I:
                             // Int Value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(IntValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(IntValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                         case KeyCode.E:
                             // Ease Value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(EaseValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(EaseValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                         case KeyCode.B:
                             // Bool value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(BoolValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(BoolValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                         case KeyCode.S:
                             // String value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(StringValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(StringValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                         case KeyCode.V:
                             // Vector3 value
-                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(Vector3ValueVertex), _mousePos));
+                            _sequencerView.CreateNode(_sequencerView.CreateVertex(typeof(Vector3ValueVertex), mousePos));
                             evt.StopPropagation();
                             break;
                     }

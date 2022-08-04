@@ -42,7 +42,7 @@ namespace NoMoney.DTAnimation
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            Vector2 pos = viewTransform.matrix.inverse.MultiplyPoint(evt.localMousePosition);
+            Vector2 pos = ToGraphPosition(evt.localMousePosition);
             TypeCache.TypeCollection vertexTypes = TypeCache.GetTypesDerivedFrom<Vertex>();
             foreach(Type type in vertexTypes)
             {
@@ -59,6 +59,8 @@ namespace NoMoney.DTAnimation
                 evt.menu.AppendAction(display, a => CreateNode(CreateVertex(type, pos)));
             }
         }
+
+        public Vector2 ToGraphPosition(Vector2 mousePos) => viewTransform.matrix.inverse.MultiplyPoint(mousePos);
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
