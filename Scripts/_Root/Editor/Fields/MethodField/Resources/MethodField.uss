@@ -10,7 +10,3 @@
 	padding-right: 2px;
 	border-bottom-left-radius: 4px;
 }
-
-MethodParameterElement > .unity-base-field > Label{
-	min-width: 60px;
-}

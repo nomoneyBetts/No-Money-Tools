@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +37,7 @@ namespace NoMoney.Audio
             _inspector = new VisualElement();
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("AudioManager");
             visualTree.CloneTree(_inspector);
+            _inspector.styleSheets.Add(Resources.Load<StyleSheet>("AudioManager"));
 
             DropdownListField loadedSounds = _inspector.Q<DropdownListField>();
             loadedSounds.SetValueWithoutNotify(serializedObject.FindProperty(LoadedSounds).GetValue<List<string>>());
@@ -458,7 +464,7 @@ namespace NoMoney.Audio
             }
 
             serializedObject.FindProperty(Sounds).SetValue(sounds);
-            serializedObject.FindProperty(LoadedSounds).SetValue(evt.newValue);
+            serializedObject.FindProperty(LoadedSounds).SetValue(loadedSounds);
             if (discardedSounds)
             {
                 DropdownListField field = _inspector.Q<DropdownListField>();

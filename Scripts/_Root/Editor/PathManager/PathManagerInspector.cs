@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +48,7 @@ namespace NoMoney
 
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("PathManagerInspector");
             visualTree.CloneTree(_inspector);
+            _inspector.styleSheets.Add(Resources.Load<StyleSheet>("PathManagerInspector"));
             _waypoints = (Vector3ListField)_inspector.Q<VisualElement>(WaypointsWrapper).ElementAt(0);
 
             // Wire buttons
@@ -478,6 +484,14 @@ namespace NoMoney
         {
             if (_selectedCurve == null) return;
             VisualElement pathSettings = _inspector.Q<VisualElement>(PathSettingsWrapper);
+
+            // Bezier Warnning
+            VisualElement warning = _inspector.Q<VisualElement>("bezier-warning");
+            warning.style.height = _selectedCurve.PType == PathType.CubicBezier ?
+                new StyleLength(StyleKeyword.Auto) :
+                new StyleLength(0f);
+            warning.style.visibility = _selectedCurve.PType == PathType.CubicBezier ?
+                Visibility.Visible : Visibility.Hidden;
 
             // Alpha
             VisualElement alpha = pathSettings.ElementAt(7);

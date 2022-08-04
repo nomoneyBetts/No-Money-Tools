@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -16,27 +21,13 @@ namespace NoMoney
         public static string DBPath
         {
             get
-            {              
-                Queue<string> queue = new Queue<string>();
-                queue.Enqueue("Assets");
-                string root = BFS("no-money-tools", queue);
-
-                string[] tools = AssetDatabase.GetSubFolders(root);
-                for (int i = 0; i < tools.Length; i++)
+            {
+                string path = $"Assets/{Name}";
+                if (!AssetDatabase.IsValidFolder(path))
                 {
-                    tools[i] = tools[i].Split('/', '\\')[^1];
+                    AssetDatabase.CreateFolder("Assets", Name);
                 }
-                int index = Array.BinarySearch(tools, Name);
-                if (index < 0)
-                {
-                    string guid = AssetDatabase.CreateFolder(root, Name);
-                    if (string.IsNullOrEmpty(guid)) throw new Exception("Unable to Create Database");
-                    return AssetDatabase.GUIDToAssetPath(guid);
-                }
-                else
-                {
-                    return $"{root}/{tools[index]}";
-                }
+                return path;
             }
         }
 
@@ -65,7 +56,10 @@ namespace NoMoney
             if (!Path.HasExtension(newName)) newName += ".asset";
             string path = AssetDatabase.GetAssetPath(obj);
             string[] parts = path.Split('/', '\\');
-            if (parts[^1] == newName) return;
+            if (parts[^1].ToLower() == newName.ToLower())
+            {
+                throw new Exception("Fail to Rename: Renaming to the same name");
+            }
 
             parts[^1] = newName;
             string newPath = string.Join<string>('/', parts);

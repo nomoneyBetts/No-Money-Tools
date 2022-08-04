@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +12,7 @@ namespace NoMoney
     public class ExposedEvent
     {
         [SerializeField]
-        public List<ExposedMethod> Methods = new List<ExposedMethod>();
+        public List<ExposedMethod> Methods = new();
 
         /// <summary>
         /// Invoke the exposed event.

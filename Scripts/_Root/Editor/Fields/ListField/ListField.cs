@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -9,7 +14,7 @@ namespace NoMoney
     /// Base class for inputing lists.
     /// </summary>
     /// <typeparam name="T">The type of List.</typeparam>
-    public abstract class ListField<T> : NoMoneyField<List<T>>
+    public abstract class ListField<T> : NMBaseField<List<T>>
     {
         #region Properties
         private string _title;
@@ -106,6 +111,34 @@ namespace NoMoney
                 ((Foldout)ElementAt(0)).value = value;
             }
         }
+
+        public override List<T> value
+        {
+            get
+            {
+                VisualElement elements = this.Q<VisualElement>(Elements);
+                List<T> list = new List<T>();
+                foreach (VisualElement element in elements.Children())
+                {
+                    list.Add(((INotifyValueChanged<T>)element.ElementAt(1)).value);
+                }
+                return list;
+            }
+            set
+            {
+                VisualElement elements = this.Q<VisualElement>(Elements);
+                elements.Clear();
+                if (value == null) return;
+                foreach (T v in value)
+                {
+                    VisualElement element = CreateElement();
+                    INotifyValueChanged<T> notifier = (INotifyValueChanged<T>)element.ElementAt(1);
+                    notifier.value = v;
+                    elements.Add(element);
+                }
+                UpdateIndices();
+            }
+        }
         #endregion
 
         private VisualElement _selectedElement, _mouseOverElement, _dragElement;
@@ -124,6 +157,7 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("ListField");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("ListField"));
 
             VisualElement elements = this.Q<VisualElement>(Elements);
             // Set drag events
@@ -140,12 +174,12 @@ namespace NoMoney
                 if (!IsArrangeable || _dragElement == null) return;
                 if (_dragElement != _mouseOverElement)
                 {
-                    List<T> previousValue = GetValue();
+                    List<T> previousValue = value;
                     int placeIndex = elements.IndexOf(_mouseOverElement);
                     elements.Remove(_dragElement);
                     elements.Insert(placeIndex, _dragElement);
                     UpdateIndices();
-                    List<T> newValue = GetValue();
+                    List<T> newValue = value;
 
                     using ChangeEvent<List<T>> change = ChangeEvent<List<T>>.GetPooled(previousValue, newValue);
                     change.target = this;
@@ -159,9 +193,9 @@ namespace NoMoney
             VisualElement buttons = this.Q<VisualElement>(Buttons);
             ((Button)buttons.ElementAt(0)).clicked += () =>
             {
-                List<T> previousValue = GetValue();
+                List<T> previousValue = value;
                 elements.Add(CreateElement());
-                List<T> newValue = GetValue();
+                List<T> newValue = value;
                 UpdateIndices();
                 using ChangeEvent<List<T>> change = ChangeEvent<List<T>>.GetPooled(previousValue, newValue);
                 change.target = this;
@@ -182,7 +216,7 @@ namespace NoMoney
 
             void RemoveElement()
             {
-                List<T> previousValue = GetValue();
+                List<T> previousValue = value;
                 if (previousValue.Count == 0) return;
                 if (_selectedElement != null)
                 {
@@ -193,7 +227,7 @@ namespace NoMoney
                 {
                     elements.RemoveAt(elements.childCount - 1);
                 }
-                List<T> newValue = GetValue();
+                List<T> newValue = value;
                 UpdateIndices();
                 using ChangeEvent<List<T>> change = ChangeEvent<List<T>>.GetPooled(previousValue, newValue);
                 change.target = this;
@@ -256,32 +290,6 @@ namespace NoMoney
                 if ((element = wrapper.Q<S>(className: ElementField)) != null) fields.Add(element);
             }
             return fields;
-        }
-
-        protected override List<T> GetValue()
-        {
-            VisualElement elements = this.Q<VisualElement>(Elements);
-            List<T> list = new List<T>();
-            foreach(VisualElement element in elements.Children())
-            {
-                list.Add(((INotifyValueChanged<T>)element.ElementAt(1)).value);
-            }
-            return list;
-        }
-
-        protected override void SetValue(List<T> value)
-        {
-            VisualElement elements = this.Q<VisualElement>(Elements);
-            elements.Clear();
-            if (value == null) return;
-            foreach(T v in value)
-            {
-                VisualElement element = CreateElement();
-                INotifyValueChanged<T> notifier = (INotifyValueChanged<T>)element.ElementAt(1);
-                notifier.value = v;
-                elements.Add(element);
-            }
-            UpdateIndices();
         }
         #endregion
 

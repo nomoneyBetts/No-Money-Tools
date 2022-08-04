@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System;
 using System.Reflection;
 using System.Collections.Generic;
@@ -11,7 +16,7 @@ namespace NoMoney
     /// <summary>
     /// A field for inputing ExposedMethods.
     /// </summary>
-    public class MethodField : NoMoneyField<ExposedMethod>
+    public class MethodField : NMBaseField<ExposedMethod>
     {
         // If return type is set, only allow methods that return the type.
         private Type _returnType;
@@ -38,6 +43,38 @@ namespace NoMoney
             }
         }
 
+        public override ExposedMethod value
+        {
+            get
+            {
+                string method = this.Q<ToolbarMenu>(Selector).text.Split('\t')[0];
+                return new ExposedMethod
+                {
+                    Target = this.Q<ObjectField>(Target).value,
+                    Method = method == "UNSET" ? null : method,
+                    Parameters = this.Q<MethodParameterListField>(Parameters).value
+                };
+            }
+            set
+            {
+                ObjectField targetField = this.Q<ObjectField>(Target);
+                MethodParameterListField parameters = this.Q<MethodParameterListField>(Parameters);
+
+                if (value == null)
+                {
+                    targetField.value = null;
+                    UpdateSelector();
+                    parameters.value = null;
+                }
+                else
+                {
+                    targetField.value = value.Target;
+                    UpdateSelector(value.Method);
+                    parameters.value = value.Parameters;
+                }
+            }
+        }
+
         private const string Target = "target";
         private const string Selector = "selector";
         private const string Parameters = "parameters";
@@ -58,16 +95,17 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("MethodField");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("MethodField"));
 
             // Register Target Field change
             this.Q<ObjectField>(Target).RegisterValueChangedCallback(evt =>
             {
                 evt.StopPropagation();
-                ExposedMethod previousValue = GetValue();
+                ExposedMethod previousValue = value;
                 previousValue.Target = evt.previousValue;
                 UpdateSelector();
                 this.Q<MethodParameterListField>(Parameters).SetValueWithoutNotify(null);
-                ExposedMethod newValue = GetValue();
+                ExposedMethod newValue = value;
                 newValue.Target = evt.newValue;
 
                 using ChangeEvent<ExposedMethod> change = ChangeEvent<ExposedMethod>.GetPooled(previousValue, newValue);
@@ -79,9 +117,9 @@ namespace NoMoney
             this.Q<MethodParameterListField>(Parameters).RegisterValueChangedCallback(evt =>
             {
                 evt.StopPropagation();
-                ExposedMethod previousValue = GetValue();
+                ExposedMethod previousValue = value;
                 previousValue.Parameters = evt.previousValue;
-                ExposedMethod newValue = GetValue();
+                ExposedMethod newValue = value;
                 newValue.Parameters = evt.newValue;
 
                 using ChangeEvent<ExposedMethod> change = ChangeEvent<ExposedMethod>.GetPooled(previousValue, newValue);
@@ -108,36 +146,6 @@ namespace NoMoney
                 targetField.SetValueWithoutNotify(newValue.Target);
                 UpdateSelector(newValue.Method);
                 parameters.SetValueWithoutNotify(newValue.Parameters);
-            }
-        }
-
-        protected override ExposedMethod GetValue()
-        {
-            string method = this.Q<ToolbarMenu>(Selector).text.Split('\t')[0];
-            return new ExposedMethod
-            {
-                Target = this.Q<ObjectField>(Target).value,
-                Method = method == "UNSET" ? null : method,
-                Parameters = this.Q<MethodParameterListField>(Parameters).value
-            };
-        }
-
-        protected override void SetValue(ExposedMethod value)
-        {
-            ObjectField targetField = this.Q<ObjectField>(Target);
-            MethodParameterListField parameters = this.Q<MethodParameterListField>(Parameters);
-
-            if (value == null)
-            {
-                targetField.value = null;
-                UpdateSelector();
-                parameters.value = null;
-            }
-            else
-            {
-                targetField.value = value.Target;
-                UpdateSelector(value.Method);
-                parameters.value = value.Parameters;
             }
         }
 
@@ -168,11 +176,11 @@ namespace NoMoney
             // The UNSET action
             selector.menu.AppendAction("UNSET", a =>
             {
-                ExposedMethod previousValue = GetValue();
+                ExposedMethod previousValue = value;
                 selector.text = "UNSET";
                 if (ReturnType != null && ReturnType != typeof(void)) selector.text += $"\t|\t{ReturnType.FullName}";
                 this.Q<MethodParameterListField>(Parameters).SetValueWithoutNotify(null);
-                ExposedMethod newValue = GetValue();
+                ExposedMethod newValue = value;
 
                 using ChangeEvent<ExposedMethod> change = ChangeEvent<ExposedMethod>.GetPooled(previousValue, newValue);
                 change.target = this;
@@ -207,7 +215,7 @@ namespace NoMoney
                         selector.style.color = _typeColors.ContainsKey(info.ReturnType) ?
                             _typeColors[info.ReturnType] : _defaultColor;
 
-                        ExposedMethod previousValue = GetValue();
+                        ExposedMethod previousValue = value;
                         selector.text = info.ReturnType == typeof(void) ?
                             info.Name : $"{info.Name}\t|\t{info.ReturnType}";
 
@@ -223,7 +231,7 @@ namespace NoMoney
                         }
                         this.Q<MethodParameterListField>(Parameters).SetValueWithoutNotify(methodParams);
 
-                        ExposedMethod newValue = GetValue();
+                        ExposedMethod newValue = value;
 
                         using ChangeEvent<ExposedMethod> change = ChangeEvent<ExposedMethod>.GetPooled(previousValue, newValue);
                         change.target = this;

@@ -1,3 +1,12 @@
+#bezier-warning{
+	align-items: center;
+}
+
+#bezier-warning > .attention{
+	color: red;
+	font-size: 16px;
+}
+
 .wrapper{
 	margin-top: 3px;
 	margin-bottom: 3px;

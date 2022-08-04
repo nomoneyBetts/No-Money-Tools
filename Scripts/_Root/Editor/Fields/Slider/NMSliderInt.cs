@@ -1,3 +1,8 @@
+// Author: Austin Betts
+// Compay: No Money Studios
+// Date Signed: 6/14/2022
+// https://www.nomoneystudios.com/
+
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
@@ -5,7 +10,7 @@ using UnityEngine;
 
 namespace NoMoney
 {
-    public class NMSliderInt : NoMoneyField<int>
+    public class NMSliderInt : NMBaseField<int>
     {
         #region Properties
         public int HighValue
@@ -51,6 +56,18 @@ namespace NoMoney
             }
 
         }
+
+        public override int value
+        {
+            get => _field.value;
+            set
+            {
+                if (value > HighValue) value = HighValue;
+                if (value < LowValue) value = LowValue;
+                _slider.value = value;
+                _field.value = value;
+            }
+        }
         #endregion
 
         private readonly SliderInt _slider;
@@ -60,6 +77,7 @@ namespace NoMoney
         {
             VisualTreeAsset visualTree = Resources.Load<VisualTreeAsset>("NMSliderInt");
             visualTree.CloneTree(this);
+            styleSheets.Add(Resources.Load<StyleSheet>("Slider"));
 
             _slider = this.Q<SliderInt>();
             _slider.RegisterValueChangedCallback(evt =>
@@ -101,16 +119,6 @@ namespace NoMoney
             if (newValue < LowValue) newValue = LowValue;
             _slider.SetValueWithoutNotify(newValue);
             _field.SetValueWithoutNotify(newValue);
-        }
-
-        protected override int GetValue() => _field.value;
-
-        protected override void SetValue(int value)
-        {
-            if (value > HighValue) value = HighValue;
-            if (value < LowValue) value = LowValue;
-            _slider.value = value;
-            _field.value = value;
         }
 
         #region UXML Factory
