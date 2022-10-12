@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-base: 232B2C
-highlight: 224B8E
-base-grey: 727272
-=======
-Tools Blue: #406CE6
->>>>>>> dt-animation
