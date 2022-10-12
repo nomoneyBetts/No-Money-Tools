@@ -1,0 +1,16 @@
+{
+    "name": "NoMoney.Tools.Editor",
+    "rootNamespace": "NoMoney.Editor",
+    "references": [
+        "GUID:8eacbd4c93634504d8d99f9cad218798"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
