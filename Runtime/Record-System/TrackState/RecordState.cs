@@ -1,9 +1,9 @@
-using StateMachine;
+using NoMoney.StateMachine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Recording.TrackState
+namespace NoMoney.RecordSystem.TrackState
 {
     public class RecordState : State
     {

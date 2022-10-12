@@ -1,8 +1,8 @@
-using StateMachine;
+using NoMoney.StateMachine;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Recording.TrackState
+namespace NoMoney.RecordSystem.TrackState
 {
     public class RewindState : State
     {
@@ -31,12 +31,12 @@ namespace Recording.TrackState
             Track track = (Track)Machine;
             float deltaTime = Time.deltaTime * track.TrackSpeed;
 
-            // Playback time may be different from recording, so find the best frame.
             LinkedListNode<Frame> prev;
             LinkedListNode<Frame> current = track.CurFrame;
             // Stop if the current frame is null.
             if (current == null) return new StopState(track);
 
+            // Playback time may be different from recording, so find the best frame.
             while ((prev = current.Previous) != null)
             {
                 float frameDelta = current.Value.Timestamp - prev.Value.Timestamp;

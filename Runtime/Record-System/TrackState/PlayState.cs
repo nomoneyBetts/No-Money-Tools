@@ -1,8 +1,8 @@
-using StateMachine;
+using NoMoney.StateMachine;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Recording.TrackState
+namespace NoMoney.RecordSystem.TrackState
 {
     public class PlayState : State
     {

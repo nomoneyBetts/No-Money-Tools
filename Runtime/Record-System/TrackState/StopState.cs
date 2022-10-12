@@ -1,6 +1,6 @@
-using StateMachine;
+using NoMoney.StateMachine;
 
-namespace Recording.TrackState
+namespace NoMoney.RecordSystem.TrackState
 {
     public class StopState : State
     {
