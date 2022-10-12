@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Recording
+namespace NoMoney.RecordSystem
 {
     public abstract class Frame
     {

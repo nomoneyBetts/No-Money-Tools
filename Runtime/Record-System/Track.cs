@@ -1,10 +1,10 @@
-using Recording.TrackState;
-using StateMachine;
+using NoMoney.RecordSystem.TrackState;
+using NoMoney.StateMachine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Recording
+namespace NoMoney.RecordSystem
 {
     public class Track : IStateMachine
     {
@@ -60,9 +60,9 @@ namespace Recording
             State = State.Run();
         }
 
-        public bool TryChange(string state)
+        public void ChangeState(string state)
         {
-            if (!State.CanChangeState(state)) return false;
+            if (!State.CanChangeState(state)) return;
 
             State = state switch
             {
@@ -72,6 +72,12 @@ namespace Recording
                 _record => new RecordState(this, _frames, _target),
                 _ => new StopState(this)
             };
+        }
+
+        public bool TryChangeState(string state)
+        {
+            if (!State.CanChangeState(state)) return false;
+            ChangeState(state);
             return true;
         }
 
