@@ -1,0 +1,14 @@
+{
+    "name": "com.nomoneystudios.nomoneytools",
+    "version": "1.1.1",
+    "displayName": "No Money Tools",
+    "description": "A collection of tools to bootstrap your next project.",
+    "unity": "2021.3.9f1",
+    "dependencies": {},
+    "keywords": ["tools", "no money", "bootstrap"],
+    "author": {
+        "name": "No Money Studios",
+        "email": "develop@nomoneystudios.com",
+        "url": "https://nomoneystudios.com"
+    }
+}
