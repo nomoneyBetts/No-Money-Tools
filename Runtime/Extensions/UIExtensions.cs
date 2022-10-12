@@ -3,16 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public static class UIExtensions 
+namespace NoMoney
 {
-    public static bool IsPointOverUI(this GraphicRaycaster raycaster, Vector2 point)
+    public static class UIExtensions
     {
-        PointerEventData data = new(EventSystem.current)
+        public static bool IsPointOverUI(this GraphicRaycaster raycaster, Vector2 point)
         {
-            position = point,
-        };
-        List<RaycastResult> results = new();
-        raycaster.Raycast(data, results);
-        return results.Count > 0;
+            PointerEventData data = new(EventSystem.current)
+            {
+                position = point,
+            };
+            List<RaycastResult> results = new();
+            raycaster.Raycast(data, results);
+            return results.Count > 0;
+        }
     }
 }
